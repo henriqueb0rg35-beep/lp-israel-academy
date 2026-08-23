@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia de Festão e Integração em Família | Israel Silva Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de Tema Padrão (Claro) */
+        :root {
+            --roxo-principal: #4C1D95;
+            --roxo-claro: #7C3AED;
+            --dourado: #D97706;
+            --branco: #FFFFFF;
+            --fundo-body: #E2E8F0;
+            --fundo-container: #FFFFFF;
+            --texto: #1E293B;
+            --fundo-info: #F3F4F6;
+            --borda-input: #cbd5e1;
+            --fundo-input: #ffffff;
+            --fonte-padrao: 'Montserrat', sans-serif;
+            --espaco-letras: normal;
+            --espaco-palavras: normal;
+            --altura-linha: 1.6;
+            --verde-wpp: #25D366;
+            --verde-wpp-hover: #128C7E;
+        }
+
+        /* Variáveis de Tema Escuro */
+        body.dark-mode {
+            --roxo-principal: #1e0b3b;
+            --roxo-claro: #5b21b6;
+            --dourado: #fbbf24;
+            --branco: #0f172a;
+            --fundo-body: #020617;
+            --fundo-container: #1e293b;
+            --texto: #f8fafc;
+            --fundo-info: #334155;
+            --borda-input: #475569;
+            --fundo-input: #0f172a;
+        }
+
+        /* Variáveis de Acessibilidade (Dislexia) */
+        body.accessibility-mode {
+            --fonte-padrao: 'Comic Sans MS', Arial, sans-serif;
+            --espaco-letras: 0.1em;
+            --espaco-palavras: 0.25em;
+            --altura-linha: 1.8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--fundo-body);
+            color: var(--texto);
+            font-family: var(--fonte-padrao);
+            letter-spacing: var(--espaco-letras);
+            word-spacing: var(--espaco-palavras);
+            line-height: var(--altura-linha);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Barra Superior */
+        .tools-bar {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--fundo-container);
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--borda-input);
+        }
+
+        .tool-btn {
+            background: none;
+            border: 1px solid var(--roxo-claro);
+            color: var(--texto);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .tool-btn:hover {
+            background-color: var(--roxo-claro);
+            color: #fff;
+        }
+
+        #btn-leitura {
+            display: none;
+            width: 100%;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        body.accessibility-mode #btn-leitura { display: block; }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--fundo-container);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho e Vídeo */
+        .header {
+            background-color: var(--roxo-principal);
+            text-align: center;
+            padding: 30px 20px;
+            color: #ffffff;
+            border-bottom: 5px solid var(--dourado);
+        }
+        .header img { max-width: 150px; margin-bottom: 15px; width: 100%; height: auto; }
+        .header h1 { font-size: 22px; font-weight: 800; text-transform: uppercase; }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+            border-bottom: 4px solid var(--roxo-claro);
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* Conteúdo Geral */
+        .content { padding: 30px 25px; }
+        .intro { text-align: center; font-size: 16px; margin-bottom: 25px; }
+        .info-box {
+            background-color: var(--fundo-info);
+            border-left: 4px solid var(--dourado);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+        .info-box p { margin-bottom: 8px; font-size: 15px; }
+        .info-box strong { color: var(--roxo-claro); }
+        h2 { color: var(--roxo-claro); font-size: 20px; margin-bottom: 15px; text-align: center; }
+        
+        .benefits { list-style: none; margin-bottom: 30px; }
+        .benefits li { margin-bottom: 12px; font-size: 15px; padding-left: 30px; position: relative; }
+        .benefits li::before { content: '✔️'; position: absolute; left: 0; top: 0; color: var(--dourado); }
+
+        /* --- ESTILOS DO FORMULÁRIO --- */
+        .form-box {
+            background-color: var(--fundo-info);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid var(--borda-input);
+        }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+        .form-input {
+            width: 100%; padding: 12px; border: 1px solid var(--borda-input);
+            border-radius: 6px; background-color: var(--fundo-input);
+            color: var(--texto); font-family: inherit; font-size: 15px; transition: 0.3s;
+        }
+        .form-input:focus {
+            outline: none; border-color: var(--roxo-claro);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+
+        .radio-group { display: flex; gap: 15px; margin-top: 5px; }
+        .radio-label { display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 15px; }
+
+        /* Grid numérico responsivo 1 a 10 */
+        .number-grid {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 8px;
+        }
+        .number-box { position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .number-box input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; }
+        .number-label {
+            display: flex; align-items: center; justify-content: center; width: 100%; height: 40px;
+            background-color: var(--fundo-input); border: 1px solid var(--borda-input);
+            border-radius: 6px; font-weight: 600; transition: 0.2s;
+        }
+        .number-box input[type="radio"]:checked ~ .number-label {
+            background-color: var(--roxo-claro); color: #ffffff; border-color: var(--roxo-claro);
+        }
+
+        .btn-submit {
+            display: block; background-color: var(--roxo-principal); color: #ffffff !important;
+            font-size: 18px; font-weight: 800; text-align: center; border: none; cursor: pointer;
+            padding: 18px 20px; border-radius: 50px; text-transform: uppercase; width: 100%; margin-top: 10px;
+            transition: 0.2s;
+        }
+        .btn-submit:hover { background-color: var(--roxo-claro); transform: scale(1.02); }
+
+        /* --- SEÇÃO NOVA: CONVITE GRUPO WHATSAPP --- */
+        .whatsapp-section {
+            background-color: var(--fundo-info);
+            padding: 30px 25px;
+            text-align: center;
+            border-top: 4px dashed var(--dourado);
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-section h3 {
+            color: var(--dourado);
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .whatsapp-section p {
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-whatsapp {
+            display: block;
+            background-color: var(--verde-wpp);
+            color: #ffffff !important;
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 18px 20px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            animation: pulse-wpp 2s infinite;
+            width: 100%;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: var(--verde-wpp-hover);
+            transform: scale(1.02);
+        }
+
+        @keyframes pulse-wpp {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Ferramentas -->
+    <div class="tools-bar">
+        <button class="tool-btn" onclick="toggleTema()">🌓 Tema Escuro</button>
+        <button class="tool-btn" onclick="toggleAcessibilidade()">👁️ Acessibilidade</button>
+    </div>
+
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <img src="logoisraelacademy.jpeg" alt="Israel Silva Academy Logo">
+            <h1>Dia de Festão e Integração em Família</h1>
+        </header>
+
+        <!-- Vídeo -->
+        <div class="video-container">
+            <iframe src="https://drive.google.com/file/d/ID_DO_SEU_VIDEO_AQUI/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+        <div class="content" id="conteudo-leitura">
+            <button id="btn-leitura" onclick="lerConteudo()">🔊 Ouvir Texto da Página</button>
+            <p class="intro">Venha viver um dia inesquecível com a gente no Centro Esportivo da Vila Nova! Preparamos um momento especial e inteiramente gratuito para as crianças, os pais e toda a família.</p>
+
+            <div class="info-box">
+                <p><strong>📅 Data:</strong> 05 de Setembro</p>
+                <p><strong>⏰ Horário:</strong> A partir das 08h00 da manhã</p>
+                <p><strong>📍 Local:</strong> Centro Esportivo da Vila Nova — Rua Guaíba</p>
+                <p><strong>👨‍👩‍👧 Público:</strong> Crianças a partir de 1 aninho e toda a família</p>
+                <p><strong>🥋 Organizador:</strong> Israel Silva</p>
+                <p><strong>📞 Contato:</strong> (43) *****-****</p>
+            </div>
+
+            <h2>O que teremos de especial?</h2>
+            <ul class="benefits">
+                <li><strong>🍧 Copo de Açaí Grátis:</strong> Um copinho de açaí especial para cada criança!</li>
+                <li><strong>🍿 Lanchinhos Liberados:</strong> Pipoca e algodão-doce à vontade.</li>
+                <li><strong>🏰 Cama Elástica:</strong> Muito pular e diversão garantida para os pequenos.</li>
+                <li><strong>🏖️ Quadra de Areia Liberada:</strong> Espaço exclusivo para os pais brincarem.</li>
+                <li><strong>👨‍👩‍👧 Dinâmicas Pais e Filhos:</strong> Gincanas e brincadeiras especiais na areia.</li>
+            </ul>
+
+            <h2>Faça sua Inscrição Gratuita!</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Preencha os dados abaixo para garantir a vaga da sua família!</p>
+
+            <!-- FORMULÁRIO -->
+            <div class="form-box">
+                <!-- Alteração de Arquitetura: target="_blank" faz a submissão abrir em nova aba para não perder a página atual -->
+                <form action="https://formsubmit.co/henriqueb0rg35@gmail.com" method="POST" target="_blank">
+                    
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="Nova Inscrição - Evento Família!">
+
+                    <div class="form-group">
+                        <label for="nome">Nome completo do responsável *</label>
+                        <input type="text" id="nome" name="Nome_Responsavel" class="form-input" required placeholder="Digite seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="Email" class="form-input" required placeholder="seuemail@exemplo.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Acompanhante? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="Possui_Acompanhante" value="Sim" onclick="toggleAcompanhante(true)" required> Sim
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="Possui_Acompanhante" value="Não" onclick="toggleAcompanhante(false)"> Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="box-nome-acompanhante" style="display: none;">
+                        <label for="nome_acompanhante">Nome do acompanhante</label>
+                        <input type="text" id="nome_acompanhante" name="Nome_Acompanhante" class="form-input" placeholder="Digite o nome de quem vai com você">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome_criancas">Nome da(s) criança(s) *</label>
+                        <input type="text" id="nome_criancas" name="Nome_Criancas" class="form-input" required placeholder="Ex: João (5 anos), Maria (3 anos)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantas pessoas irão participar? *</label>
+                        <div class="number-grid">
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="1" required><span class="number-label">1</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="2"><span class="number-label">2</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="3"><span class="number-label">3</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="4"><span class="number-label">4</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="5"><span class="number-label">5</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="6"><span class="number-label">6</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="7"><span class="number-label">7</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="8"><span class="number-label">8</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="9"><span class="number-label">9</span></label>
+                            <label class="number-box"><input type="radio" name="Qtd_Pessoas" value="10"><span class="number-label">10</span></label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">ENVIAR INSCRIÇÃO</button>
+                </form>
+            </div>
+            
+        </div> <!-- Fim da div 'content' -->
+
+        <!-- SEÇÃO WHATSAPP DESTACADA -->
+        <div class="whatsapp-section">
+            <h3>A experiência não para por aqui! 🚀</h3>
+            <p>O evento gratuito é apenas uma amostra do que estamos preparando para você, papai, mamãe e responsáveis. Queremos convidar sua família para conhecer nosso <strong>Projeto de Incentivo ao Esporte e Conexão Familiar</strong>!</p>
+            <p>Entre no nosso Grupo VIP do WhatsApp agora mesmo para receber conteúdos exclusivos, dicas de integração e ficar por dentro das regras e novidades do projeto.</p>
+            
+            <!-- Cole o link do grupo de WhatsApp abaixo -->
+            <a href="https://chat.whatsapp.com/SEU_LINK_DE_CONVITE_AQUI" class="btn-whatsapp" target="_blank">
+                ENTRAR NO GRUPO AGORA
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function toggleTema() { document.body.classList.toggle('dark-mode'); }
+        function toggleAcessibilidade() {
+            document.body.classList.toggle('accessibility-mode');
+            window.speechSynthesis.cancel(); 
+        }
+
+        function toggleAcompanhante(mostrar) {
+            const box = document.getElementById('box-nome-acompanhante');
+            const input = document.getElementById('nome_acompanhante');
+            if(mostrar) {
+                box.style.display = 'block';
+                input.required = true;
+            } else {
+                box.style.display = 'none';
+                input.required = false;
+                input.value = '';
+            }
+        }
+
+        let lendo = false;
+        function lerConteudo() {
+            if (lendo) {
+                window.speechSynthesis.cancel();
+                document.getElementById('btn-leitura').innerText = '🔊 Ouvir Texto da Página';
+                lendo = false;
+                return;
+            }
+            const textoParaLer = document.getElementById('conteudo-leitura').innerText;
+            const mensagem = new SpeechSynthesisUtterance(textoParaLer);
+            mensagem.lang = 'pt-BR';
+            mensagem.rate = 0.9;
+            mensagem.onend = function() {
+                document.getElementById('btn-leitura').innerText = '🔊 Ouvir Texto da Página';
+                lendo = false;
+            };
+            window.speechSynthesis.speak(mensagem);
+            document.getElementById('btn-leitura').innerText = '⏹️ Parar Leitura';
+            lendo = true;
+        }
+    </script>
+</body>
+</html>
