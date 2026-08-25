@@ -467,6 +467,24 @@
             document.getElementById('btn-leitura').innerText = '⏹️ Parar Leitura';
             lendo = true;
         }
+        // Controle do Vídeo Otimizado (Lazy Load)
+        document.getElementById('btn-play-video').addEventListener('click', function() {
+            const playerContainer = document.getElementById('video-player-container');
+            const iframe = document.getElementById('video-iframe');
+            
+            // Injeta a URL real tirando do data-src. O vídeo carrega apenas agora.
+            iframe.src = iframe.getAttribute('data-src');
+            playerContainer.classList.add('active');
+        });
+
+        document.getElementById('btn-close-video').addEventListener('click', function() {
+            const playerContainer = document.getElementById('video-player-container');
+            const iframe = document.getElementById('video-iframe');
+            
+            // Apaga o src. Isso interrompe o áudio do vídeo imediatamente.
+            iframe.src = 'about:blank';
+            playerContainer.classList.remove('active');
+        });
     </script>
 </body>
 </html>
