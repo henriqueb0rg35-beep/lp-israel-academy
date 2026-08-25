@@ -306,25 +306,28 @@
         </header>
 
 <!-- Vídeo Otimizado (Lazy Load) -->
-        <div class="video-grid">
-            <div class="video-card">
-                <div class="video-inline-wrap">
-                    <!-- Botão de Play Falso (Gatilho) -->
-                    <button type="button" class="video-inline-trigger" id="btn-play-video">
-                        <span class="play-overlay"><span class="play-btn">▶</span></span>
-                        <span style="position:absolute; bottom:20px; width:100%; color:white; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Clique para assistir</span>
-                    </button>
-                    
-                    <!-- Player Real Oculto -->
-                    <div class="video-inline-player" id="video-player-container">
-                        <div class="player-wrap">
-                            <iframe id="video-iframe" src="about:blank" data-src="https://drive.google.com/file/d/1ZWX9BYXVa6xdUCcO5Iylowt38yukPYvF/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <button type="button" class="close-player" id="btn-close-video">✖ Fechar Vídeo</button>
-                    </div>
+<div class="video-grid">
+    <div class="video-card">
+        <div class="video-inline-wrap">
+            
+            <!-- GATILHO: Botão de Play com o ID correto -->
+            <button type="button" class="video-inline-trigger" id="btn-play-video">
+                <span class="play-overlay"><span class="play-btn">▶</span></span>
+                <span style="position:absolute; bottom:20px; width:100%; color:white; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Clique para assistir</span>
+            </button>
+            
+            <!-- PLAYER: Oculto por padrão com o ID correto -->
+            <div class="video-inline-player" id="video-player-container">
+                <div class="player-wrap">
+                    <iframe id="video-iframe" src="about:blank" data-src="https://drive.google.com/file/d/1ZWX9BYXVa6xdUCcO5Iylowt38yukPYvF/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
+                <!-- BOTÃO FECHAR -->
+                <button type="button" class="close-player" id="btn-close-video">✖ Fechar Vídeo</button>
             </div>
+            
         </div>
+    </div>
+</div>
 
         <div class="content" id="conteudo-leitura">
             <button id="btn-leitura" onclick="lerConteudo()">🔊 Ouvir Texto da Página</button>
@@ -467,24 +470,33 @@
             document.getElementById('btn-leitura').innerText = '⏹️ Parar Leitura';
             lendo = true;
         }
-        // Controle do Vídeo Otimizado (Lazy Load)
-        document.getElementById('btn-play-video').addEventListener('click', function() {
-            const playerContainer = document.getElementById('video-player-container');
-            const iframe = document.getElementById('video-iframe');
-            
-            // Injeta a URL real tirando do data-src. O vídeo carrega apenas agora.
+        // Controle do Vídeo Otimizado (Lazy Load Blindado)
+document.addEventListener('DOMContentLoaded', function() {
+    // Captura os elementos pelo ID
+    const btnPlay = document.getElementById('btn-play-video');
+    const btnClose = document.getElementById('btn-close-video');
+    const playerContainer = document.getElementById('video-player-container');
+    const iframe = document.getElementById('video-iframe');
+
+    // Trava de segurança: só adiciona o evento de clique se o botão existir na tela
+    if (btnPlay && playerContainer && iframe) {
+        btnPlay.addEventListener('click', function() {
+            // Injeta o link real do Google Drive
             iframe.src = iframe.getAttribute('data-src');
+            // Mostra o player de vídeo por cima do botão
             playerContainer.classList.add('active');
         });
+    }
 
-        document.getElementById('btn-close-video').addEventListener('click', function() {
-            const playerContainer = document.getElementById('video-player-container');
-            const iframe = document.getElementById('video-iframe');
-            
-            // Apaga o src. Isso interrompe o áudio do vídeo imediatamente.
+    if (btnClose) {
+        btnClose.addEventListener('click', function() {
+            // Remove o link para cortar o áudio imediatamente
             iframe.src = 'about:blank';
+            // Esconde o player, revelando o botão de play novamente
             playerContainer.classList.remove('active');
         });
+    }
+});
     </script>
 </body>
 </html>
