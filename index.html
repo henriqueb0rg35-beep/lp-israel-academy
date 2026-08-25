@@ -256,7 +256,15 @@
         /* --- ESTILOS DO VÍDEO INLINE (LAZY LOAD) --- */
         .video-grid { width: 100%; }
         .video-card { background: #000; border-bottom: 4px solid var(--roxo-claro); }
-        .video-inline-wrap { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        /* Substitua a classe antiga por esta nova */
+        .video-inline-wrap { 
+            position: relative; 
+            width: 100%; 
+            /* A mágica aqui: 56.25% é o vídeo (16:9) + 55px fixos dedicados só para a barra do Google Drive */
+            padding-bottom: calc(56.25% + 55px); 
+            height: 0; 
+            overflow: hidden; 
+        }
         
         .video-inline-trigger {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
