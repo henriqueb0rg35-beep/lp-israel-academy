@@ -271,9 +271,22 @@
         </header>
 
         <!-- Vídeo -->
-        <div class="video-container">
-            <iframe src="https://drive.google.com/file/d/1ZWX9BYXVa6xdUCcO5Iylowt38yukPYvF/view?usp=drive_link" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+        <div class="video-grid">
+            
+            <div class="video-card">
+                <div class="video-inline-wrap">
+                    <button type="button" class="video-inline-trigger">
+                        <span class="play-overlay"><span class="play-btn">▶</span></span>
+                        <span style="position:absolute; bottom:10px; width:100%; color:white;">Clique para ver mais sobre o dia Especial!</span>
+                    </button>
+                    <div class="video-inline-player">
+                        <div class="player-wrap">
+                            <iframe src="about:blank" data-src="https://drive.google.com/file/d/1ZWX9BYXVa6xdUCcO5Iylowt38yukPYvF/preview"></iframe>
+                        </div>
+                        <button type="button" class="close-player">Fechar vídeo</button>
+                    </div>
+                </div>
+            </div>
 
         <div class="content" id="conteudo-leitura">
             <button id="btn-leitura" onclick="lerConteudo()">🔊 Ouvir Texto da Página</button>
