@@ -253,6 +253,41 @@
             70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
+        /* --- ESTILOS DO VÍDEO INLINE (LAZY LOAD) --- */
+        .video-grid { width: 100%; }
+        .video-card { background: #000; border-bottom: 4px solid var(--roxo-claro); }
+        .video-inline-wrap { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        
+        .video-inline-trigger {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #1e293b; border: none; cursor: pointer; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10; transition: 0.3s;
+        }
+        .video-inline-trigger:hover { background: #334155; }
+        
+        .play-overlay {
+            width: 70px; height: 70px; background: var(--dourado); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.5); animation: pulse 2s infinite;
+        }
+        .play-btn { color: white; font-size: 28px; margin-left: 6px; }
+        
+        .video-inline-player {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; flex-direction: column; z-index: 20; background: #000;
+        }
+        .video-inline-player.active { display: flex; } /* Ativado via JS */
+        
+        .player-wrap { position: relative; width: 100%; flex-grow: 1; }
+        .player-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
+        .close-player {
+            background: #ef4444; color: white; border: none; padding: 12px;
+            font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 14px;
+            letter-spacing: 1px; transition: 0.2s;
+        }
+        .close-player:hover { background: #dc2626; }
     </style>
 </head>
 <body>
@@ -270,23 +305,26 @@
             <h1>Dia de Festão e Integração em Família</h1>
         </header>
 
-        <!-- Vídeo -->
+<!-- Vídeo Otimizado (Lazy Load) -->
         <div class="video-grid">
-            
             <div class="video-card">
                 <div class="video-inline-wrap">
-                    <button type="button" class="video-inline-trigger">
+                    <!-- Botão de Play Falso (Gatilho) -->
+                    <button type="button" class="video-inline-trigger" id="btn-play-video">
                         <span class="play-overlay"><span class="play-btn">▶</span></span>
-                        <span style="position:absolute; bottom:10px; width:100%; color:white;">Clique para ver mais sobre o dia Especial!</span>
+                        <span style="position:absolute; bottom:20px; width:100%; color:white; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Clique para assistir</span>
                     </button>
-                    <div class="video-inline-player">
+                    
+                    <!-- Player Real Oculto -->
+                    <div class="video-inline-player" id="video-player-container">
                         <div class="player-wrap">
-                            <iframe src="about:blank" data-src="https://drive.google.com/file/d/1ZWX9BYXVa6xdUCcO5Iylowt38yukPYvF/preview"></iframe>
+                            <iframe id="video-iframe" src="about:blank" data-src="https://drive.google.com/file/d/1ZWX9BYXVa6xdUCcO5Iylowt38yukPYvF/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
-                        <button type="button" class="close-player">Fechar vídeo</button>
+                        <button type="button" class="close-player" id="btn-close-video">✖ Fechar Vídeo</button>
                     </div>
                 </div>
             </div>
+        </div>
 
         <div class="content" id="conteudo-leitura">
             <button id="btn-leitura" onclick="lerConteudo()">🔊 Ouvir Texto da Página</button>
