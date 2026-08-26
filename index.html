@@ -296,6 +296,37 @@
             letter-spacing: 1px; transition: 0.2s;
         }
         .close-player:hover { background: #dc2626; }
+        
+        /* --- RODAPÉ INSTITUCIONAL (GLOBAL FOOTER) --- */
+        .site-footer {
+            width: 100%;
+            background-color: var(--roxo-principal);
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+            border-top: 5px solid var(--dourado);
+            margin-top: 40px; /* Cria um respiro após o conteúdo central */
+        }
+        
+        .site-footer p {
+            margin-bottom: 12px;
+            color: #f8fafc;
+        }
+
+        .site-footer strong {
+            color: var(--dourado);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-credits {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 12px;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -440,6 +471,19 @@
             </a>
         </div>
     </div>
+
+    <!-- RODAPÉ INSTITUCIONAL -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p><strong>Propriedade e Organização:</strong><br> Israel Silva Academy - Artes Marciais</p>
+            <p><strong>Colaboração Especial:</strong><br> Meire Vieira - Educação Infantil | Psicomotricidade | AEE</p>
+        </div>
+        
+        <div class="footer-credits">
+            <p>&copy; 2026 Todos os direitos reservados.<br>
+            Desenvolvimento e Mídias Sociais por <strong>THS - Tavares & Homem Systems</strong></p>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script>
