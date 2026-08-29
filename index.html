@@ -26,44 +26,6 @@
             --verde-wpp-hover: #128C7E;
         }
 
-        /* --- TRAVA DE HOMOLOGAÇÃO (MARCA D'ÁGUA) --- */
-        body {
-            /* Empurra o site um pouco para baixo para não ser coberto pela faixa */
-            padding-top: 35px; 
-        }
-
-        .watermark-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ef4444; /* Vermelho alerta */
-            color: #ffffff;
-            text-align: center;
-            padding: 8px 10px;
-            font-size: 14px;
-            font-weight: 800;
-            z-index: 10000; /* Fica acima de tudo no site */
-            text-transform: uppercase;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
-        }
-
-        .watermark-overlay {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-35deg); /* Centraliza e inclina */
-            font-size: clamp(24px, 6vw, 48px); /* Responsivo: cresce e diminui com a tela */
-            font-weight: 900;
-            color: rgba(239, 68, 68, 0.25); /* Vermelho com 25% de opacidade */
-            white-space: nowrap;
-            pointer-events: none; /* CRÍTICO: Deixa o mouse "atravessar" o texto para clicar nos botões */
-            z-index: 9999;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            user-select: none; /* Impede que o cliente selecione o texto */
-        }
         
         /* Variáveis de Tema Escuro */
         body.dark-mode {
@@ -370,17 +332,7 @@
 </head>
 <body>
 
-    <!-- AVISOS DE HOMOLOGAÇÃO -->
-    <div class="watermark-banner">
-        Produto para visualização de erros e ajustes - Não finalizado
-    </div>
     
-    <div class="watermark-overlay">
-        Produto para visualização<br>
-        de erros e ajustes<br>
-        Não finalizado
-    </div>
-
     <!-- Barra de Ferramentas -->
     <div class="tools-bar">
         <button class="tool-btn" onclick="toggleTema()">🌓 Tema Escuro</button>
@@ -432,7 +384,7 @@
                 <p><strong>📍 Local:</strong> Centro Esportivo da Vila Nova — Rua Guaíba, 72 - Londrina</p>
                 <p><strong>👨‍👩‍👧 Público:</strong> Crianças a partir de 1 aninho e toda a família</p>
                 <p><strong>🥋 Organizador:</strong> Israel Silva - Academy de Artes Marciais</p>
-                <p><strong>📞 Contato:</strong> (43) 9****-****</p>
+                <p><strong>📞 Contato:</strong> (43) 99604-9968</p>
             </div>
 
             <h2>O que teremos de especial?</h2>
@@ -451,6 +403,7 @@
             <div class="form-box">
                 <!-- Alteração de Arquitetura: target="_blank" faz a submissão abrir em nova aba para não perder a página atual -->
                 <form action="https://formsubmit.co/henrique.b0rg35@gmail.com" method="POST" target="_blank">
+                <form action="https://formsubmit.co/israelcp.luta@gmail.com" method="POST" target="_blank">
                     
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_subject" value="Nova Inscrição - Evento Família!">
